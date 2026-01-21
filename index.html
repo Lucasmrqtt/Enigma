@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Morreu. 8 de setembro de 2022</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input {
+      margin-top: 20px;
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+      background: #111;
+      color: white;
+      border: 1px solid #444;
+      outline: none;
+      text-align: center;
+    }
+
+    .mensagem {
+      margin-top: 20px;
+      font-size: 16px;
+      min-height: 20px;
+    }
+
+    #qrcode {
+      margin-top: 20px;
+      width: 180px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <p>Morreu. 8 de setembro de 2022</p>
+
+    <input
+      type="text"
+      id="entrada"
+      placeholder=""
+      autocomplete="off"
+    >
+
+    <div class="mensagem" id="mensagem"></div>
+
+    <img
+      id="qrcode"
+      src="qrcode.png"
+      alt="QR Code"
+    >
+  </div>
+
+  <script>
+    const input = document.getElementById("entrada");
+    const mensagem = document.getElementById("mensagem");
+    const qr = document.getElementById("qrcode");
+
+    let nomeCorretoDigitado = false;
+
+    input.addEventListener("input", () => {
+      const valor = input.value.toLowerCase().trim();
+
+      if (valor === "rainha elizabeth ii") {
+        nomeCorretoDigitado = true;
+        mensagem.textContent = "Mude a data de seu computador \n Espere em torno de 20s";
+      } else {
+        nomeCorretoDigitado = false;
+        mensagem.textContent = "";
+        qr.style.display = "none";
+      }
+    });
+
+    setInterval(() => {
+      if (!nomeCorretoDigitado) return;
+
+      const hoje = new Date();
+      const dia = hoje.getDate();
+      const mes = hoje.getMonth() + 1;
+      const ano = hoje.getFullYear();
+
+      if (dia === 8 && mes === 9 && ano === 2022) {
+        mensagem.textContent = "";
+        qr.style.display = "block";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>

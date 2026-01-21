@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
-  <title>Morreu. 8 de setembro de 2022</title>
+  <title>Hehehenigma</title>
 
   <style>
     body {
@@ -18,7 +19,8 @@
     }
 
     .container {
-      max-width: 600px;
+      position: relative;
+      /* necessário para o span se posicionar em relação à imagem */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -40,71 +42,186 @@
       margin-top: 20px;
       font-size: 16px;
       min-height: 20px;
+      line-height: 1.4;
     }
 
     #qrcode {
       margin-top: 20px;
       width: 180px;
       display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
+
+    #qrcode.show {
+      display: block;
+      opacity: 1;
+    }
+
+    #guitarra {
+      display: none;
+      width: 90%;
+      opacity: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #guitarra.show {
+      display: block;
+      opacity: 1;
+    }
+
+    #caca {
+      display: none;
+      width: 50%;
+      opacity: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #caca.show {
+      display: block;
+      opacity: 1;
+    }
+
+    #mensagemSecreto {
+      display: none;
+      color: transparent;
+      user-select: text;
+      font-size: 16px;
+      margin-top: 10px;
+      opacity: 0;
+    }
+
+    #mensagemSecreto.show {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Só a palavra Fêmea terá padding */
   </style>
 </head>
 
 <body>
 
   <div class="container">
-    <p>Morreu. 8 de setembro de 2022</p>
+    <p id="title">Morreu. 8 de setembro de 2022</p>
 
-    <input
-      type="text"
-      id="entrada"
-      placeholder=""
-      autocomplete="off"
-    >
+    <input type="text" id="entrada" placeholder="" autocomplete="off">
 
     <div class="mensagem" id="mensagem"></div>
 
-    <img
-      id="qrcode"
-      src="qrcode.png"
-      alt="QR Code"
-    >
+    <img id="qrcode" src="qrcode.png" alt="QR Code">
+    <img id="guitarra" src="Mensagem.png" alt="Guitarra">
+    <img id="caca" src="Caça palavra.png" alt="Caça palavra">
+    <div id="mensagemSecreto">
+    </div>
   </div>
 
   <script>
     const input = document.getElementById("entrada");
     const mensagem = document.getElementById("mensagem");
     const qr = document.getElementById("qrcode");
+    const guitarra = document.getElementById("guitarra");
+    const secreto = document.getElementById("mensagemSecreto");
+    const titulo = document.getElementById("title");
+    const caca = document.getElementById("caca");
 
-    let nomeCorretoDigitado = false;
 
     input.addEventListener("input", () => {
       const valor = input.value.toLowerCase().trim();
 
-      if (valor === "rainha elizabeth ii") {
-        nomeCorretoDigitado = true;
-        mensagem.textContent = "Mude a data de seu computador \n Espere em torno de 20s";
-      } else {
-        nomeCorretoDigitado = false;
+      if (valor === atob("cmFpbmhhIGVsaXphYmV0aCBpaQ==")) {
+        mensagem.innerHTML = "Mude a data de seu computador<br>Espere em torno de 20s";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        titulo.textContent = "Fase 2";
+        secreto.classList.remove("show");
+      }
+      else if (valor === atob("cmFpbmhhIGVsaXphYmV0aA==")) {
+        mensagem.innerHTML = "Qual das?";
+      }
+      else if (btoa(unescape(encodeURIComponent(valor))) === "ZWRnZcO4eWE=") { 
+        mensagem.innerHTML = "";
+        secreto.innerHTML = "Fêmea";
+        guitarra.classList.add("show");
+        secreto.classList.add("show");
+        titulo.textContent = "Fase 3";
+      }
+      else if (valor === atob("Z3VpdGFycmE=")) {
+        mensagem.innerHTML = "523714493415<br>HCPB14HXQK15 - Palavra final<br>";
+        secreto.classList.add("show");
+        secreto.innerHTML = "Dica: Você já me usou antes";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        titulo.textContent = "Fase 4";
+      }
+      else if (valor === "HCPB14HXQK15".toLowerCase()) {
+        mensagem.innerHTML = "Por favor né, faz o bagulho direito<br>Use o primeiro codigo como guia para a palavra final";
+        secreto.innerHTML = "";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        
+        
+      }
+      else if (valor === atob("Y2FtdW5kb25nbw==")) {
+        mensagem.innerHTML = "01001000 01010000 01010110  ";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        titulo.textContent = "Fase 5";
+        
+      }
+      else if (valor === atob("aHB2")) {
+
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        titulo.textContent = "Fase 6";
+        caca.classList.add("show");
+      }
+      else if (valor === atob("ZXN0ZWxpb25hdG8=")) {
+        mensagem.innerHTML = "Suiço<br>Americano<br>Prato<br>Manteiga";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        caca.classList.remove("show");
+        titulo.textContent = "Fase 7";
+      }
+      else if (valor === atob("cXVlaWpv")) {
+        mensagem.innerHTML = "A lavagem de dinheiro é previnida pelos começos";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        caca.classList.remove("show");
+        titulo.textContent = "Fase 8";
+      }
+        else if (valor === atob("cmVnY2hlcQ==")) {
+        mensagem.innerHTML = "PARABENS! VOCÊ COMPLETOU O ENIGMA!";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        caca.classList.remove("show");
+        titulo.textContent = "Fase 9 - final";
+      }
+      
+      else {
         mensagem.textContent = "";
-        qr.style.display = "none";
+        guitarra.classList.remove("show");
+        qr.classList.remove("show");
+        secreto.classList.remove("show");
+        caca.classList.remove("show");
       }
     });
 
     setInterval(() => {
-      if (!nomeCorretoDigitado) return;
-
       const hoje = new Date();
       const dia = hoje.getDate();
       const mes = hoje.getMonth() + 1;
       const ano = hoje.getFullYear();
 
       if (dia === 8 && mes === 9 && ano === 2022) {
-        mensagem.textContent = "";
-        qr.style.display = "block";
+        qr.classList.add("show");
+        mensagem.innerHTML = "As próximas respostas digite aqui ↑<br>Não esqueça de reverter para a data original";
       }
     }, 1000);
   </script>
 
 </body>
+
 </html>
